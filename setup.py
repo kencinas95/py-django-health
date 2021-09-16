@@ -1,4 +1,4 @@
-from distutils.core import setup
+from setuptools import setup
 
 
 with open('README.md', 'r') as md:
@@ -10,8 +10,9 @@ setup(
   author='kencinas95',
   author_email='kencinas95@developers.com',
   description='Health checkers for Django apps',
-  long_description=long_description,
-  url='url = https://github.com/kencinas95/py-django-health',
+  long_description=str(long_description),
+  long_description_content_type='text/markdown',
+  url='https://github.com/kencinas95/py-django-health',
   license='GPLv3',
   packages=['health', 'health.checkers'],
   keywords=['health', 'checkers', 'heartbeat', 'microservices'],
