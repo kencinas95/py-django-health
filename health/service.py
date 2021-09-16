@@ -22,11 +22,10 @@ class _CheckerService:
     def __init__(self):
         self._checkers = {}
 
-    def register(self, key: str, checker_pkg: str) -> typing.NoReturn:
+    def register(self, checker_pkg: str) -> typing.NoReturn:
         """
         Register health checker instances.
 
-        :param key: key
         :param checker_pkg: checker_pkg
         """
         try:
@@ -39,18 +38,18 @@ class _CheckerService:
                 raise ValueError(f"is not an instance of HealthChecker")
             _checker.setup()
 
-            self._checkers[key] = _checker
+            self._checkers[checker_pkg] = _checker
 
         except ModuleNotFoundError as ex:
-            log.error(f'{key} health checker: {ex}')
+            log.error(f'{checker_pkg} health checker: {ex}')
             raise ImproperlyConfigured('module not found')
 
         except AttributeError as ex:
-            log.error(f'{key} health checker: {ex}')
+            log.error(f'{checker_pkg} health checker: {ex}')
             raise ImproperlyConfigured('attribute error')
 
         except ValueError as ex:
-            log.error(f'{key} health checker: {ex}')
+            log.error(f'{checker_pkg} health checker: {ex}')
             raise ImproperlyConfigured('value error')
 
     def check(self) -> typing.List[ComponentHealth]:

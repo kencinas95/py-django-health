@@ -1,6 +1,6 @@
 import typing
 
-from models import ComponentHealth
+from health.models import ComponentHealth
 
 
 class HealthChecker:
